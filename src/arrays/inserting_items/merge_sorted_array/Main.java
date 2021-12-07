@@ -1,4 +1,4 @@
-package arrays.merge_sorted_array;
+package arrays.inserting_items.merge_sorted_array;
 
 /*
  * You are given two integer arrays nums1 and nums2, sorted in non-decreasing order,
@@ -39,10 +39,20 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        int[] nums1 = new int[]{1, 2, 3, 0, 0, 0};
-        int[] nums2 = new int[]{2, 5, 6};
-        int m = 3;
-        int n = 3;
+//        int[] nums1 = new int[]{1, 2, 3, 0, 0, 0};
+//        int[] nums2 = new int[]{2, 5, 6};
+//        int m = 3;
+//        int n = 3;
+
+//        int[] nums1 = new int[]{1};
+//        int[] nums2 = new int[]{0};
+//        int m = 1;
+//        int n = 0;
+
+        int[] nums1 = new int[]{0};
+        int[] nums2 = new int[]{1};
+        int m = 0;
+        int n = 1;
 
         System.out.println("Before:\nnums1 = " + Arrays.toString(nums1));
         System.out.println("nums2 = " + Arrays.toString(nums2));
@@ -54,6 +64,18 @@ public class Main {
     }
 
     public static void merge(int[] nums1, int m, int[] nums2, int n) {
-
+        int ptr1 = m - 1;
+        int ptr2 = n - 1;
+        for (int ptr = m + n - 1; ptr >= 0; ptr--) {
+            if (ptr2 < 0 && ptr1 >= 0) {
+                nums1[ptr] = nums1[ptr1--];
+                continue;
+            }
+            if (ptr2 >= 0 && ptr1 < 0) {
+                nums1[ptr] = nums2[ptr2--];
+                continue;
+            }
+            nums1[ptr] = nums1[ptr1] >=  nums2[ptr2] ? nums1[ptr1--] : nums2[ptr2--];
+        }
     }
 }
