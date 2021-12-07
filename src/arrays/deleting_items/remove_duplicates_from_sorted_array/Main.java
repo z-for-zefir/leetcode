@@ -50,24 +50,49 @@ package arrays.deleting_items.remove_duplicates_from_sorted_array;
  * nums is sorted in non-decreasing order.
  * */
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
-        int[] nums = new int[] {1, 1, 2};
-        int[] expectedNums = new int[] {1, 2};
+//        int[] nums = new int[] {1, 1, 2};
+//        int[] expectedNums = new int[] {1, 2};
 
-//        int[] nums = new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
-//        int[] expectedNums = new int[]{0, 1, 2, 3, 4};
+        int[] nums = new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
+        int[] expectedNums = new int[]{0, 1, 2, 3, 4};
 
         int k = removeDuplicates(nums);
+
+        System.out.println(Arrays.toString(nums));
 
         assert k == expectedNums.length;
 
         for (int i = 0; i < k; i++) {
             assert nums[i] == expectedNums[i];
         }
+
+        System.out.print("[");
+        for (int i = 0; i < k; i++) {
+            System.out.print(nums[i]);
+            if (i != k - 1)
+                System.out.print(", ");
+        }
+        System.out.println("]");
+        System.out.println(Arrays.toString(expectedNums));
+
     }
 
+    @SuppressWarnings("ManualArrayCopy")
     public static int removeDuplicates(int[] nums) {
-        return 0;
+        int k = nums.length;
+
+        for (int i = 0; i < k - 1; i++) {
+            if (nums[i] == nums[i + 1]) {
+                for (int j = i + 1; j < k - 1; j++)
+                    nums[j] = nums[j + 1];
+                k--;
+                i--;
+            }
+        }
+        return k;
     }
 }
