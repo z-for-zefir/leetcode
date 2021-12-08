@@ -37,14 +37,33 @@ public class Main {
     public static void main(String[] args) {
         //int[] arr = new int[]{10, 2, 5, 3};
         //int[] arr = new int[]{7, 1, 14, 11};
-        int[] arr = new int[]{3, 1, 7, 11};
+        //int[] arr = new int[]{3, 1, 7, 11};
+        int[] arr = new int[]{-2, 0, 10, -19, 4, 6, -8};
 
         System.out.println(checkIfExist(arr));
 
     }
 
-    public static boolean checkIfExist(int[] arr) {
+    public static boolean checkIfExist2(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i] == arr[j] * 2 || arr[j] == arr[i] * 2)
+                    return true;
+            }
+        }
+        return false;
+    }
 
+    public static boolean checkIfExist(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            int doubled = arr[i] * 2;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (j == i)
+                    continue;
+                if (arr[j] == doubled)
+                    return true;
+            }
+        }
         return false;
     }
 }
