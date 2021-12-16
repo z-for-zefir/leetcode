@@ -33,17 +33,34 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        int[] arr = new int[]{17, 18, 5, 4, 6, 1};
-        int[] expected = new int[]{18, 6, 6, 6, 1, -1};
+        //int[] arr = new int[]{17, 18, 5, 4, 6, 1};
+        //int[] expected = new int[]{18, 6, 6, 6, 1, -1};
         //int[] arr = new int[]{400};
         //int[] expected = new int[]{-1};
+        int[] arr = new int[]{1, 2};
+        int[] expected = new int[]{2, -1};
+
+        replaceElements(arr);
 
         System.out.println(Arrays.toString(arr));
         System.out.println(Arrays.toString(expected));
+
     }
 
-    public static int[] replaceElements(int[] arr) {
+    public static void replaceElements(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            var k = arr[maxElementIndex(arr, i + 1)];
+            arr[i] = arr[maxElementIndex(arr, i + 1)];
+        }
+        arr[arr.length - 1] = -1;
+    }
 
-        return null;
+    private static int maxElementIndex(int[] arr, int startIndex) {
+        int maxIndex = startIndex;
+        for (int i = startIndex; i < arr.length; i++) {
+            if (arr[i] > arr[maxIndex])
+                maxIndex = i;
+        }
+        return maxIndex;
     }
 }
