@@ -53,15 +53,18 @@ package arrays.in_place_operations.remove_duplicates_from_sorted_array;
  * nums is sorted in non-decreasing order.
  * */
 
+import java.awt.desktop.PrintFilesEvent;
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
-        int[] nums = new int[]{1, 1, 2};
-        int[] expectedNums = new int[]{1, 2};
+        int[] nums = new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4, 4};
+        int[] expectedNums = new int[]{0, 1, 2, 3, 4};
 
-        //int[] nums = new int[]{1, 1, 2};
-        //int[] expectedNums = new int[]{1, 2};
+        //int[] nums = new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+        //int[] expectedNums = new int[]{1};
 
-        int k = removeDuplicates(nums); // Calls your implementation
+        int k = removeDuplicates_bestSolution(nums); // Calls your implementation
 
         assert k == expectedNums.length;
         for (int i = 0; i < k; i++) {
@@ -69,7 +72,36 @@ public class Main {
         }
     }
 
+    @SuppressWarnings("ManualArrayCopy")
     private static int removeDuplicates(int[] nums) {
-        return 0;
+        int k = nums.length;
+        for (int i = 0; i < k - 1; ) {
+            int j = i + 1;
+            while (j < k && nums[j] == nums[i]) {
+                j++;
+            }
+            // j = индекс первого несовпадающего
+            i++;
+            int step = j - i;
+            k = k - step;
+            for (int p = i; p < k; p++) {
+                nums[p] = nums[p + step];
+            }
+        }
+        return k;
+    }
+
+    private static int removeDuplicates_bestSolution(int[] nums) {
+        int readPtr;
+        int writePtr; // будет всегда корректным индексом конца массива
+
+        for (readPtr = 1, writePtr = 0; readPtr < nums.length; readPtr++) {
+            if (nums[readPtr] != nums[writePtr]) {
+                nums[++writePtr] = nums[readPtr];
+            }
+        }
+
+        return writePtr + 1;
+
     }
 }
