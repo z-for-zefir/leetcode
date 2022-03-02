@@ -54,6 +54,14 @@ public class Main {
     }
 
     private static int removeElement(int[] nums, int val) {
-        return 0;
+        int k = nums.length;
+
+        for (int i = 0; i < k; i++) {
+            if (nums[i] == val) {
+                nums[i] = nums[--k];
+                i--;
+            }
+        }
+        return k;
     }
 }
