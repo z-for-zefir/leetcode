@@ -41,6 +41,14 @@ public class Main {
     }
 
     private static void moveZeros(int[] nums) {
-
+        int writePtr = 0;
+        int readPtr = 0;
+        for (; readPtr < nums.length; readPtr++) {
+            if (nums[readPtr] != 0) {
+                int t = nums[readPtr];
+                nums[readPtr] = 0;
+                nums[writePtr++] = t;
+            }
+        }
     }
 }
