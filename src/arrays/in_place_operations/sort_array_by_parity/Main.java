@@ -43,6 +43,22 @@ public class Main {
     }
 
     public static int[] sortArrayByParity(int[] nums) {
+        int currEven = nums.length - 1;
+        int currOdd = 0;
+
+        // т.е. будет продолжаться, пока не все со своих сторон
+        while (currEven > currOdd) {
+            if (nums[currEven] % 2 == 0 && nums[currOdd] % 2 != 0) {
+                int t = nums[currEven];
+                nums[currEven--] = nums[currOdd];
+                nums[currOdd++] = t;
+            }
+            if (nums[currEven] % 2 != 0)
+                currEven--;
+            if (nums[currOdd] % 2 == 0)
+                currOdd++;
+        }
+
         return nums;
     }
 }
