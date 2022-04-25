@@ -19,26 +19,44 @@ package arrays.disappeared_numbers;
  * Follow up: Could you do it without extra space and in O(n) runtime?
  * You may assume the returned list does not count as extra space.*/
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        int[] nums = new int[]{4, 3, 2, 7, 8, 2, 3, 1};
+        int[] nums = new int[]{1};
         List<Integer> answer = Arrays.asList(5, 6);
 
         List<Integer> calculated = findDisappearedNumbers(nums);
-        calculated.sort(Integer::compareTo);
 
         System.out.println(answer + " = answer");
         System.out.println(calculated + " = calculated");
     }
-
-    @SuppressWarnings("UnnecessaryLocalVariable")
+    
     public static List<Integer> findDisappearedNumbers(int[] nums) {
         List<Integer> result = new ArrayList<>();
+        int i = 0;
+        while (i < nums.length) {
+            if (nums[i] == 0)
+                i++;
+            else {
+                if (nums[nums[i] - 1] == nums[i]) {
+                    if (nums[i] - 1 != i)
+                        nums[i] = 0;
+                    else
+                        i++;
+                } else {
+                    int temp = nums[i];
+                    nums[i] = nums[nums[i] - 1];
+                    nums[temp - 1] = temp;
 
+                }
+            }
+        }
+
+        for (i = 0; i < nums.length; i++) {
+            if (nums[i] == 0)
+                result.add(i + 1);
+        }
         return result;
     }
 }
